@@ -16,30 +16,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   		LT(_FN, KC_E), 
 		KC_1, KC_2, KC_3, KC_4, 
 		KC_5, KC_6, KC_7, KC_8, 
-		KC_9, KC_0, KC_Q, LT(_RGB, KC_W)
+		KC_9, KC_0, KC_Q, TO(_LAYSEL)
         ),
     
+
+    [_LAYSEL] = LAYOUT_ortho_3x4(
+		KC_NO, 
+		TO(_RGB), TO(_FN), KC_NO, KC_NO, 
+		KC_NO, KC_NO, KC_NO, KC_NO, 
+		KC_NO, KC_NO, KC_NO, TO(_BASE)
+        ),
+
+
     [_RGB] = LAYOUT_ortho_3x4(
 		RGB_TOG, 
-		RGB_MOD, KC_TRNS, KC_TRNS, RGB_RMOD, 
-		RGB_SPI, KC_TRNS, KC_TRNS, RGB_SPD, 
-		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+		RGB_MOD, KC_NO, KC_NO, RGB_RMOD, 
+		RGB_SPI, KC_NO, KC_NO, RGB_SPD, 
+		KC_NO, KC_NO, KC_NO, TO(_BASE)
         ),
   
     [_FN] = LAYOUT_ortho_3x4(
-		KC_TRNS, 
-		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, 
-		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, 
-		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+		KC_NO, 
+		RESET, KC_NO, KC_NO, KC_NO, 
+		KC_NO, KC_NO, KC_NO, KC_NO, 
+		KC_NO, KC_NO, KC_NO, TO(_BASE)
         ),
-
-    [_LAYSEL] = LAYOUT_ortho_3x4(
-		KC_TRNS, 
-		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, 
-		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, 
-		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
-        ),
-
 
 };
 
@@ -212,13 +213,13 @@ bool oled_task_user(void) {
 
    switch (get_highest_layer(layer_state)) {
     case _BASE:
-      oled_write_P(PSTR("Main"), false);
+      oled_write_P(PSTR("Main  "), false);
       break;
     case _RGB:
-      oled_write_P(PSTR("RGB "), false);
+      oled_write_P(PSTR("RGB   "), false);
       break;
     case _FN:
-      oled_write_P(PSTR("FN  "), false);
+      oled_write_P(PSTR("FN    "), false);
       break;      
     case _LAYSEL:
       oled_write_P(PSTR("Layers"), false);
