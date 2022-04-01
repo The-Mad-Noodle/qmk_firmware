@@ -52,8 +52,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define OLED_DISPLAY_128X32
 #define OLED_FONT_H "drivers/oled/glcdfont.c"
-/*
-#define OLED_FONT_H "keyboards/themadnoodle/udon13/lib/murphpadfont.c"
-*/
+
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
