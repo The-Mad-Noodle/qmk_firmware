@@ -1,7 +1,7 @@
-# Noodle Pad v1 Keypad with Encoder
+# Udon:13 Keypad with Encoder
 
-![NoodlePad TOP](https://static.wixstatic.com/media/59d0ff_052f27ee5ae84266821af7277c51c4ed~mv2.jpg)
-![NoodlePad RGB](https://static.wixstatic.com/media/59d0ff_c91f2adc258547a38cc5b480a8d9c510~mv2.jpg)
+![Udon13 Main](https://static.wixstatic.com/media/59d0ff_08162e950f364d80865cd40362f919aa~mv2.png)
+![Udon13 RGB](https://static.wixstatic.com/media/59d0ff_ad653d090a034ff1b9fde55944c26431~mv2.png)
 
 The Udon:13 by The Mad Noodle Prototypes is a custom 3x4 mechanical keypad with an encoder knob and full RGB Underglow and OLED Display.
 
