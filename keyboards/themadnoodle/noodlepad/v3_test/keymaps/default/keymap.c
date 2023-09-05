@@ -7,7 +7,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     /* LAYER 0
      * ,-----------------------.
-     * |   <<  |  MUTE |  >>   |  ENCODER - PRESS (MUTE) / KNOB (VOLUME CONTROL)
+     * |   <<  |       |  >>   |  
      * |-------+-------+-------|
      * |  STOP |  PLAY | MEDIA |
      * |-------+-------+-------|
@@ -16,15 +16,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
 
     [0] = LAYOUT_ortho_3x3(
-      KC_MPRV, LT(2, KC_MUTE), KC_MNXT, 
+      KC_MPRV,  KC_TRNS, KC_MNXT, 
       KC_MSTP, KC_MPLY, KC_MSEL,
-      KC_CALC, KC_MAIL, LT(1, KC_MYCM)
+      LT(2,KC_CALC), KC_MAIL, LT(1, KC_MYCM)
       ),
 
 
     /* LAYER 1
      * ,-----------------------.
-     * | MODE+ |RGB TOG| MODE- |  ENCODER - PRESS (NA) / KNOB (Hue Control)
+     * | MODE+ |       | MODE- |  
      * |-------+-------+-------|
      * |  SPD- |  SPD+ |Bright |
      * |-------+-------+-------|
@@ -33,7 +33,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     
     [1] = LAYOUT_ortho_3x3(
-      RGB_MOD, RGB_TOG, RGB_RMOD, 
+      RGB_MOD, KC_TRNS, RGB_RMOD, 
       RGB_SPI, RGB_SPD, RGB_VAI, 
       RGB_SAI, RGB_SAD, KC_TRNS
       ),
@@ -41,7 +41,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       
     /* LAYER 2 (ENCODER)
      * ,-----------------------.
-     * |       |       |       |  ENCODER - PRESS (NA) / KNOB (Arrow Left/Right)
+     * |       |       |       |  
      * |-------+-------+-------|
      * |       |       |       |
      * |-------+-------+-------|
