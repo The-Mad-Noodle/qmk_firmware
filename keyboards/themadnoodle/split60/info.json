@@ -16,7 +16,7 @@
     },
     "encoder": {
     "rotary": [
-      {"pin_a": "E6", "pin_b": "E7"}
+      {"pin_a": "E7", "pin_b": "E6"}
     ]
   },
     "rgblight": {
