@@ -86,8 +86,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 };
 #endif
 
-
-// Layer Light ================================================
+//  ======================Layer Light==========================
 
 /*
 const rgblight_segment_t PROGMEM layer_zero[] = RGBLIGHT_LAYER_SEGMENTS(
