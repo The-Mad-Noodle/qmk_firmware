@@ -85,3 +85,54 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 
 };
 #endif
+
+
+// Layer Light ================================================
+
+const rgblight_segment_t PROGMEM layer_zero[] = RGBLIGHT_LAYER_SEGMENTS(
+
+    {0, 1, HSV_WHITE}
+);
+
+const rgblight_segment_t PROGMEM layer_one[] = RGBLIGHT_LAYER_SEGMENTS(
+
+    {1, 1, HSV_WHITE}
+);
+
+const rgblight_segment_t PROGMEM layer_two[] = RGBLIGHT_LAYER_SEGMENTS(
+
+    {2, 1, HSV_WHITE}
+);
+
+const rgblight_segment_t PROGMEM layer_three[] = RGBLIGHT_LAYER_SEGMENTS(
+
+    {3, 1, HSV_WHITE}
+);
+
+const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
+
+    layer_zero, // 0
+    layer_one, // 1
+    layer_two, // 2
+    layer_three // 3
+
+);
+
+void keyboard_post_init_user(void) {
+    // Enable the LED layers
+
+    rgblight_layers = my_rgb_layers;
+}
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+
+    rgblight_set_layer_state(0, layer_state_cmp(state, 0));
+
+    rgblight_set_layer_state(1, layer_state_cmp(state, 1));
+
+    rgblight_set_layer_state(2, layer_state_cmp(state, 2));
+
+    rgblight_set_layer_state(3, layer_state_cmp(state, 3));
+
+    return state;
+}
