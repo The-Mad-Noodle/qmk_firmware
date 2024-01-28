@@ -1,21 +1,21 @@
-# NCC-1701-KB v.2
+# NoodlePad v.2
 
-![NCC1701KBv2](https://i.imgur.com/Zq1SjBTh.jpg)
+![NoodPad v2](https://i.imgur.com/tzP0tdzh.jpg)
 
-*The NCC-1701-KB v.2 is a 8 key macro keypad with a push button encoder knob*
+The Noodlepad v.2 is a 8 hotswap key macro keypad with a push button encoder knob.
 
 * Keyboard Maintainer: [The Mad Noodle](https://github.com/The-Mad-Noodle)
-* Hardware Supported: NCC-1701-KB v.2 PCB
+* Hardware Supported: NoodlePad v.2 PCB
 * Hardware Availability: https://www.madnoodleprototypes.com/shop
 
 
 Compile example for this keyboard (after setting up your build environment):
 
-    qmk compile -kb themadnoodle/ncc1701kb/v2 -km default
+    qmk compile -kb themadnoodle/noodlepad/v2 -km default
 
 Flashing example for this keyboard:
 
-    qmk flash -kb themadnoodle/ncc1701kb/v2 -km default
+    qmk flash -kb themadnoodle/noodlepad/v2 -km default
 
 See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
 
