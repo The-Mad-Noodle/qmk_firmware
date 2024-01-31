@@ -87,6 +87,8 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 //======================Layer Light==========================
 
 /*
+// Turn on LED according to the layer state
+
 const rgblight_segment_t PROGMEM layer_zero[] = RGBLIGHT_LAYER_SEGMENTS( {0, 1, HSV_WHITE} );
 const rgblight_segment_t PROGMEM layer_one[] = RGBLIGHT_LAYER_SEGMENTS( {1, 1, HSV_WHITE} );
 const rgblight_segment_t PROGMEM layer_two[] = RGBLIGHT_LAYER_SEGMENTS( {2, 1, HSV_WHITE} );
