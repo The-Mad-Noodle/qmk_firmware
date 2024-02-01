@@ -4,8 +4,7 @@
 #include QMK_KEYBOARD_H
 
 enum custom_keycodes {
-    // existing keycodes
-    RGB_IND = QK_USER, // add this line for the LED toggle
+    RGB_IND = QK_USER_0, // Toggle the Layer Indicators Modes
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -91,102 +90,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 };
 #endif
 
-//  ======================Layer Light==========================
-
-// Light up single LED according to the layer state
-
-/*
-const rgblight_segment_t PROGMEM layer_zero[] = RGBLIGHT_LAYER_SEGMENTS( {0, 1, HSV_WHITE} );
-const rgblight_segment_t PROGMEM layer_one[] = RGBLIGHT_LAYER_SEGMENTS( {1, 1, HSV_WHITE} );
-const rgblight_segment_t PROGMEM layer_two[] = RGBLIGHT_LAYER_SEGMENTS( {2, 1, HSV_WHITE} );
-const rgblight_segment_t PROGMEM layer_three[] = RGBLIGHT_LAYER_SEGMENTS( {3, 1, HSV_WHITE} );
-
-const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
-
-    layer_zero, // 0
-    layer_one, // 1
-    layer_two, // 2
-    layer_three // 3
-
-);
-
-void keyboard_post_init_user(void) {
-    // Enable the LED layers
-
-    rgblight_layers = my_rgb_layers;
-}
-
-// Turns on LED according to the layer state
-layer_state_t layer_state_set_user(layer_state_t state) {
-
-    rgblight_set_layer_state(0, layer_state_cmp(state, 0));
-
-    rgblight_set_layer_state(1, layer_state_cmp(state, 1));
-
-    rgblight_set_layer_state(2, layer_state_cmp(state, 2));
-
-    rgblight_set_layer_state(3, layer_state_cmp(state, 3));
-
-    return state;
-}
-
-
-// Blink Light Layer when Layer activates ================================================
-
-const rgblight_segment_t PROGMEM layer_zero[] = RGBLIGHT_LAYER_SEGMENTS( {0, 4, HSV_WHITE} );
-const rgblight_segment_t PROGMEM layer_one[] = RGBLIGHT_LAYER_SEGMENTS( {0, 4, HSV_RED} );
-const rgblight_segment_t PROGMEM layer_two[] = RGBLIGHT_LAYER_SEGMENTS( {0, 4, HSV_GREEN} );
-const rgblight_segment_t PROGMEM layer_three[] = RGBLIGHT_LAYER_SEGMENTS( {0, 4, HSV_BLUE} );
-const rgblight_segment_t PROGMEM layer_zero_all[]  = RGBLIGHT_LAYER_SEGMENTS({0, 1, HSV_WHITE});
-const rgblight_segment_t PROGMEM layer_one_all[]   = RGBLIGHT_LAYER_SEGMENTS({1, 1, HSV_WHITE});
-const rgblight_segment_t PROGMEM layer_two_all[]   = RGBLIGHT_LAYER_SEGMENTS({2, 1, HSV_WHITE});
-const rgblight_segment_t PROGMEM layer_three_all[] = RGBLIGHT_LAYER_SEGMENTS({3, 1, HSV_WHITE});
-
-const rgblight_segment_t *const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
-
-    layer_zero,     // 0
-    layer_one,      // 1
-    layer_two,      // 2
-    layer_three,    // 3
-    layer_zero,     // 4
-    layer_one,      // 5
-    layer_two,      // 6
-    layer_three     // 7
-
-);
-
-void keyboard_post_init_user(void) {
-    // Enable the LED layers
-
-    rgblight_layers = my_rgb_layers;
-}
-
-layer_state_t layer_state_set_user(layer_state_t state) {
-    // Get the new layer number
-    uint8_t layer = get_highest_layer(state);
-
-    switch (layer) {
-        case 0:
-            rgblight_blink_layer(0, 1000);
-            break;
-        case 1:
-            rgblight_blink_layer(1, 1000);
-            break;
-        case 2:
-            rgblight_blink_layer(2, 1000);
-            break;
-        case 3:
-            rgblight_blink_layer(3, 1000);
-            break;
-
-        default:
-            rgblight_blink_layer(0, 1000);
-    }
-
-    return state;
-}
-
-*/
+//  ======================Layer Light Setup==========================
 
 const rgblight_segment_t PROGMEM layer_zero_all[]  = RGBLIGHT_LAYER_SEGMENTS({0, 4, HSV_WHITE});
 const rgblight_segment_t PROGMEM layer_one_all[]   = RGBLIGHT_LAYER_SEGMENTS({0, 4, HSV_RED});
@@ -207,26 +111,28 @@ const rgblight_segment_t *const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
     layer_zero,      // 4
     layer_one,       // 5
     layer_two,       // 6
-    layer_three     // 7
+    layer_three      // 7
 
 );
 
 void keyboard_post_init_user(void) {
     // Enable the LED layers
-
     rgblight_layers = my_rgb_layers;
 }
 
 
-bool led_mode; // false for first LED mode, true for second LED mode
+//  ======================Custom Keycodes==========================
+
+bool led_mode; // false for Blinking Mode, true for Static mode
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case RGB_IND:
             if (record->event.pressed) {
-                // Code to toggle between the two LED modes
+                // Code to toggle between the two Layer Indicators
                 led_mode = !led_mode; // Toggle the mode
 
+                // Updateing lighting layer when key is pressed
                 if (led_mode) {
                     if (layer_state_is(0)) {
                         rgblight_set_layer_state(4, true);
@@ -273,27 +179,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 layer_state_t layer_state_set_user(layer_state_t state) {
     
     if (led_mode) {
-        // Code from the first block for static lights
-/*
-        switch (get_highest_layer(state)) {
-            case 0:
-                sethsv(HSV_WHITE, (rgb_led_t *)&led[0]); // led 0
-                break;
-            case 1:
-                sethsv(HSV_WHITE, (rgb_led_t *)&led[1]); // led 1
-                break;
-            case 2:
-                sethsv(HSV_WHITE, (rgb_led_t *)&led[2]); // led 2
-                break;
-            case 3:
-                sethsv(HSV_WHITE, (rgb_led_t *)&led[3]); // led 3
-                break;
-
-            default:
-                sethsv(HSV_WHITE, (rgb_led_t *)&led[0]); // led 0
-        }
-        rgblight_set();
- */
+        // Code for Static Layer Indicators 
 
         rgblight_set_layer_state(4, layer_state_cmp(state, 0));
         rgblight_set_layer_state(5, layer_state_cmp(state, 1));
@@ -302,26 +188,26 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         
 
     } else {
-        // Code from the second block for blinking lights
+        // Code for Blinking Layer Indicators
         
          uint8_t layer = get_highest_layer(state);
 
         switch (layer) {
             case 0:
-                rgblight_blink_layer(0, 1000);
+                rgblight_blink_layer(0, 500);
                 break;
             case 1:
-                rgblight_blink_layer(1, 1000);
+                rgblight_blink_layer(1, 500);
                 break;
             case 2:
-                rgblight_blink_layer(2, 1000);
+                rgblight_blink_layer(2, 500);
                 break;
             case 3:
-                rgblight_blink_layer(3, 1000);
+                rgblight_blink_layer(3, 500);
                 break;
 
             default:
-                rgblight_blink_layer(0, 1000); 
+                rgblight_blink_layer(0, 500); 
         }
 
   
