@@ -188,48 +188,27 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 */
 
-bool led_mode; // false for first LED mode, true for second LED mode
+const rgblight_segment_t PROGMEM layer_zero_all[]  = RGBLIGHT_LAYER_SEGMENTS({0, 4, HSV_WHITE});
+const rgblight_segment_t PROGMEM layer_one_all[]   = RGBLIGHT_LAYER_SEGMENTS({0, 4, HSV_RED});
+const rgblight_segment_t PROGMEM layer_two_all[]   = RGBLIGHT_LAYER_SEGMENTS({0, 4, HSV_GREEN});
+const rgblight_segment_t PROGMEM layer_three_all[] = RGBLIGHT_LAYER_SEGMENTS({0, 4, HSV_BLUE});
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case RGB_IND:
-            if (record->event.pressed) {
-                // Code to toggle between the two LED modes
-                led_mode = !led_mode; // Toggle the mode
-            } else {
-                // Do something else when release
-            }
-            return false; // Skip all further processing of this key
-        default:
-            return true; // Process all other keycodes normally
-    }
-}
-
-const rgblight_segment_t PROGMEM layer_zero_all[]   = RGBLIGHT_LAYER_SEGMENTS({0, 4, HSV_WHITE});
-const rgblight_segment_t PROGMEM layer_one_all[]     = RGBLIGHT_LAYER_SEGMENTS({0, 4, HSV_RED});
-const rgblight_segment_t PROGMEM layer_two_all[]     = RGBLIGHT_LAYER_SEGMENTS({0, 4, HSV_GREEN});
-const rgblight_segment_t PROGMEM layer_three_all[]   = RGBLIGHT_LAYER_SEGMENTS({0, 4, HSV_BLUE});
-
-/*
 const rgblight_segment_t PROGMEM layer_zero[]  = RGBLIGHT_LAYER_SEGMENTS({0, 1, HSV_WHITE});
 const rgblight_segment_t PROGMEM layer_one[]   = RGBLIGHT_LAYER_SEGMENTS({1, 1, HSV_WHITE});
 const rgblight_segment_t PROGMEM layer_two[]   = RGBLIGHT_LAYER_SEGMENTS({2, 1, HSV_WHITE});
 const rgblight_segment_t PROGMEM layer_three[] = RGBLIGHT_LAYER_SEGMENTS({3, 1, HSV_WHITE});
-*/
 
 const rgblight_segment_t *const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
 
     layer_zero_all,  // 0
     layer_one_all,   // 1
     layer_two_all,   // 2
-    layer_three_all // 3
-    
-    /*
-    layer_zero,  // 4
-    layer_one,   // 5
-    layer_two,   // 6
-    layer_three  // 7
-    */
+    layer_three_all, // 3
+    layer_zero,      // 4
+    layer_one,       // 5
+    layer_two,       // 6
+    layer_three     // 7
+
 );
 
 void keyboard_post_init_user(void) {
@@ -238,32 +217,94 @@ void keyboard_post_init_user(void) {
     rgblight_layers = my_rgb_layers;
 }
 
+
+bool led_mode; // false for first LED mode, true for second LED mode
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case RGB_IND:
+            if (record->event.pressed) {
+                // Code to toggle between the two LED modes
+                led_mode = !led_mode; // Toggle the mode
+
+                if (led_mode) {
+                    if (layer_state_is(0)) {
+                        rgblight_set_layer_state(4, true);
+                    }
+                    if (layer_state_is(1)) {
+                        rgblight_set_layer_state(5, true);
+                    }
+                    if (layer_state_is(2)) {
+                        rgblight_set_layer_state(6, true);
+                    }
+                    if (layer_state_is(3)) {
+                        rgblight_set_layer_state(7, true);
+                    }
+                } else {
+                    rgblight_set_layer_state(4, false);
+                    rgblight_set_layer_state(5, false);
+                    rgblight_set_layer_state(6, false);
+                    rgblight_set_layer_state(7, false);
+
+                    if (layer_state_is(0)) {
+                        rgblight_blink_layer(0, 1000);
+                    }
+                    if (layer_state_is(1)) {
+                        rgblight_blink_layer(1, 1000);
+                    }
+                    if (layer_state_is(2)) {
+                        rgblight_blink_layer(2, 1000);
+                    }
+                    if (layer_state_is(3)) {
+                        rgblight_blink_layer(3, 1000);
+                    }
+                }
+            } else {
+
+            }
+            return false; // Skip all further processing of this key
+        default:
+            return true; // Process all other keycodes normally
+    }
+}
+
+
+
 layer_state_t layer_state_set_user(layer_state_t state) {
-    rgblight_setrgb(RGB_OFF);
+    
     if (led_mode) {
         // Code from the first block for static lights
-
+/*
         switch (get_highest_layer(state)) {
             case 0:
-                rgblight_sethsv_at(HSV_WHITE, 0);
+                sethsv(HSV_WHITE, (rgb_led_t *)&led[0]); // led 0
                 break;
             case 1:
-                rgblight_sethsv_at(HSV_WHITE, 1);
+                sethsv(HSV_WHITE, (rgb_led_t *)&led[1]); // led 1
                 break;
             case 2:
-                rgblight_sethsv_at(HSV_WHITE, 2);
+                sethsv(HSV_WHITE, (rgb_led_t *)&led[2]); // led 2
                 break;
             case 3:
-                rgblight_sethsv_at(HSV_WHITE, 3);
+                sethsv(HSV_WHITE, (rgb_led_t *)&led[3]); // led 3
                 break;
 
             default:
-                rgblight_sethsv_at(HSV_WHITE, 0);
+                sethsv(HSV_WHITE, (rgb_led_t *)&led[0]); // led 0
         }
+        rgblight_set();
+ */
+
+        rgblight_set_layer_state(4, layer_state_cmp(state, 0));
+        rgblight_set_layer_state(5, layer_state_cmp(state, 1));
+        rgblight_set_layer_state(6, layer_state_cmp(state, 2));
+        rgblight_set_layer_state(7, layer_state_cmp(state, 3));
+        
+
     } else {
         // Code from the second block for blinking lights
-
-        uint8_t layer = get_highest_layer(state);
+        
+         uint8_t layer = get_highest_layer(state);
 
         switch (layer) {
             case 0:
@@ -280,18 +321,10 @@ layer_state_t layer_state_set_user(layer_state_t state) {
                 break;
 
             default:
-                rgblight_blink_layer(0, 1000);
+                rgblight_blink_layer(0, 1000); 
         }
 
-            /*
-            rgblight_set_layer_state(4, layer_state_cmp(state, 0));
-
-            rgblight_set_layer_state(5, layer_state_cmp(state, 1));
-
-            rgblight_set_layer_state(6, layer_state_cmp(state, 2));
-
-            rgblight_set_layer_state(7, layer_state_cmp(state, 3));
-        */
+  
             
             }        
     return state;
