@@ -1,4 +1,4 @@
-// Copyright 2023 The Mad Noodle(@the_mad_noodle)
+// Copyright 2023 Jesse Leventhal (@The=Mad-Noodle)
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #pragma once
