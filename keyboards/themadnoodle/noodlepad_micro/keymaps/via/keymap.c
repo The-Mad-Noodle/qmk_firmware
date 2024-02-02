@@ -4,7 +4,7 @@
 #include QMK_KEYBOARD_H
 
 enum custom_keycodes {
-    RGB_IND = QK_USER_0, // Toggle the Layer Indicators Modes
+    L_IND = QK_KB_0, // Toggle the Layer Indicators Modes
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -72,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [3] = LAYOUT(
       KC_TRNS,         KC_TRNS, 
       TO(1), KC_TRNS, TO(2), 
-      RGB_IND, KC_TRNS, TO(0)
+      KC_TRNS, KC_TRNS, TO(0)
       )
     
 };
@@ -127,7 +127,7 @@ bool led_mode; // false for Blinking Mode, true for Static mode
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case RGB_IND:
+        case L_IND:
             if (record->event.pressed) {
                 // Code to toggle between the two Layer Indicators
                 led_mode = !led_mode; // Toggle the mode
@@ -173,8 +173,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return true; // Process all other keycodes normally
     }
 }
-
-
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     
