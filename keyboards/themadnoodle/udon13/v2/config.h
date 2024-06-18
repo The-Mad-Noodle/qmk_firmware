@@ -10,3 +10,7 @@
 #define I2C1_SDA_PIN GP4
 #define I2C_DRIVER I2CD0
 
+// OLED Timeout
+#define OLED_TIMEOUT 1800000
+#define OLED_FADE_OUT
+#define OLED_FADE_OUT_INTERVAL 8
