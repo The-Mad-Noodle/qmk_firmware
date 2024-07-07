@@ -13,8 +13,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT(
         KC_MUTE,
         KC_MPLY, KC_MPRV, KC_MNXT, KC_MSEL, 
-        KC_UNDO, KC_CALC, KC_MAIL, KC_MYCM, 
-        KC_COPY, KC_CUT, KC_PSTE, TO(3)
+        C(KC_Z), KC_CALC, KC_MAIL, KC_MYCM, 
+        C(KC_C), C(KC_X), C(KC_V), L_CYC
         ),
 
 /*Layer 1*/
@@ -22,7 +22,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         RGB_TOG, 
         RGB_SAD, RGB_SAI, RGB_HUD, RGB_HUI, 
         RGB_MOD, RGB_RMOD, RGB_M_P, RGB_M_B, 
-        RGB_M_SW, RGB_SPD, RGB_SPI, TO(0)
+        RGB_M_SW, RGB_SPD, RGB_SPI, L_CYC
         ),
 
 /*Layer 2*/ 
@@ -30,15 +30,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO, 
         KC_NO, KC_NO, KC_NO, KC_NO, 
         KC_NO, KC_NO, KC_NO, KC_NO, 
-        KC_NO, KC_NO, KC_NO, TO(0)
+        KC_NO, KC_NO, KC_NO, L_CYC
         ),
 
 /*Layer 3*/       
     [3] = LAYOUT(
         KC_NO, 
-        TO(1), TO(2), KC_NO, KC_NO, 
-        KC_NO, KC_NO, KC_NO, KC_NO, 
-        KC_NO, KC_NO, KC_NO, TO(0)
+        TO(0), TO(1), TO(2), KC_NO, 
+        KC_NO, KC_NO, KC_NO, L_IND, 
+        LT(0,KC_PWR), LT(1, KC_SLEP), LT(2, KC_WAKE), L_CYC
         ),
 
 };

@@ -77,6 +77,6 @@
         "driver": "vendor"
     },
     "encoder": {
-        "rotary": [{ "pin_a": "GP2", "pin_b": "GP1" }]
+        "rotary": [{ "pin_a": "GP1", "pin_b": "GP2" }]
     }
 }
