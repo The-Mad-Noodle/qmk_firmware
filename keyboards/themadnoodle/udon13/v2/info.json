@@ -16,6 +16,8 @@
         "oled": true,
         "oled_driver_enable": true,
         "encoder": true,
+        "midi": true,
+        "midi_advanced": true,
         "unicode": true
     },
     "rgblight": {
